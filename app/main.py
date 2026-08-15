@@ -19,7 +19,10 @@ def health():
 # Models
 # ============================================================
 
-detector = TextDetection()
+detector = TextDetection(
+    text_det_thresh=0.2,
+    text_det_box_thresh=0.3,
+)
 recognizer = TextRecognition()
 
 
