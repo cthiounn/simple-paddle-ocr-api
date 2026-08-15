@@ -1,0 +1,9 @@
+shiny:
+  image:
+    repository: cthiounn/simple-paddle-ocr-api
+    tag: "latest"
+  ingress:
+    enabled: true
+    hostname: simple-paddle-ocr-api.lab.sspcloud.fr
+  probe:
+    enabled: false
