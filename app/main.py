@@ -10,7 +10,7 @@ app = FastAPI(
 )
 
 ocr = PaddleOCR(
-    lang="fr",
+    lang="en",
     use_doc_orientation_classify=False,
     use_doc_unwarping=False,
     use_textline_orientation=False,
@@ -36,7 +36,7 @@ def ocr_image(file: UploadFile = File(...)):
             detail="File must be an image",
         )
 
-    data = await file.read()
+    data = file.read()
 
     try:
         image = Image.open(
