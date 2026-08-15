@@ -23,24 +23,16 @@ def health():
 
 
 @app.post("/ocr")
-def ocr_image(file: UploadFile = File(...)):
-    if not file.content_type:
+def ocr_image(file: bytes = File(...)):
+    if not file:
         raise HTTPException(
             status_code=400,
-            detail="Content-Type missing",
+            detail="Empty file",
         )
-
-    if not file.content_type.startswith("image/"):
-        raise HTTPException(
-            status_code=400,
-            detail="File must be an image",
-        )
-
-    data = file.read()
 
     try:
         image = Image.open(
-            io.BytesIO(data)
+            io.BytesIO(file)
         ).convert("RGB")
     except Exception as exc:
         raise HTTPException(
@@ -61,11 +53,9 @@ def ocr_image(file: UploadFile = File(...)):
     texts = []
 
     for result in results:
-        # PaddleOCR 3.x retourne un Result object.
-        # Les champs OCR sont directement disponibles ici.
-        rec_texts = result['rec_texts']
-        rec_scores = result['rec_scores']
-        rec_boxes = result['rec_boxes']
+        rec_texts = result["rec_texts"]
+        rec_scores = result["rec_scores"]
+        rec_boxes = result["rec_boxes"]
 
         for text, score, box in zip(
             rec_texts,
@@ -75,10 +65,7 @@ def ocr_image(file: UploadFile = File(...)):
             if not text:
                 continue
 
-            x1, y1, x2, y2 = map(
-                int,
-                box,
-            )
+            x1, y1, x2, y2 = map(int, box)
 
             texts.append({
                 "text": text,
