@@ -23,7 +23,7 @@ def health():
 
 
 @app.post("/ocr")
-async def ocr_image(file: UploadFile = File(...)):
+def ocr_image(file: UploadFile = File(...)):
     if not file.content_type:
         raise HTTPException(
             status_code=400,
