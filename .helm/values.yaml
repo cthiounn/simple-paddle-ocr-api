@@ -6,10 +6,3 @@ shiny:
   ingress:
     enabled: true
     hostname: simple-paddle-ocr-api.lab.sspcloud.fr
-  probes:
-    livenessProbe:
-      enabled: false
-    readinessProbe:
-      enabled: false
-    startupProbe:
-      enabled: false
