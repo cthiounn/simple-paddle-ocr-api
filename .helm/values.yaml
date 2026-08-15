@@ -2,8 +2,14 @@ shiny:
   image:
     repository: cthiounn/simple-paddle-ocr-api
     tag: "latest"
+    pullPolicy: Always
   ingress:
     enabled: true
     hostname: simple-paddle-ocr-api.lab.sspcloud.fr
-  probe:
-    enabled: false
+  probes:
+    livenessProbe:
+      enabled: false
+    readinessProbe:
+      enabled: false
+    startupProbe:
+      enabled: false
