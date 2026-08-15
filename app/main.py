@@ -20,8 +20,10 @@ def health():
 # ============================================================
 
 detector = TextDetection(
-    text_det_thresh=0.2,
-    text_det_box_thresh=0.3,
+    thresh=0.2,
+    box_thresh=0.3,
+    limit_side_len=1600,
+    limit_type="max",
 )
 recognizer = TextRecognition()
 
