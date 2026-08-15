@@ -17,7 +17,7 @@ ocr = PaddleOCR(
 )
 
 
-@app.get("/health")
+@app.get("/")
 def health():
     return {"status": "ok"}
 
